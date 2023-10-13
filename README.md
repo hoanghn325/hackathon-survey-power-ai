@@ -1,6 +1,6 @@
 # Deployment
 
-Run `ng deploy --base-href=hackathon-survey-power-ai`
+Run `ng deploy --base-href=/hackathon-survey-power-ai/`
 
 Link demo: https://hoanghn325.github.io/hackathon-survey-power-ai/hackathon-survey-power-ai/
 
