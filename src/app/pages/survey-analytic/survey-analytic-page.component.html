@@ -1,1 +1,24 @@
-<p>survey-analytic-page works!</p>
+<form [formGroup]="form">
+
+  <div class="survey-section">
+    <h3>Survey Analytics</h3>
+
+    <button [disabled]="isLoading" (click)="showProductFileUpload()" id="upload-csv-btn" nzType="primary" nz-button>
+      {{ 'Import File' }}
+    </button>
+    <input #csvImport (change)="handleImportCSV($event)" accept=".csv" style="display: none" type="file" />
+    <div class="action">
+      <button [disabled]="isLoading" nz-button nzType="default" (click)="showSurvey()">Take Survey</button>
+      <nz-spin *ngIf="isLoading" nzSimple [nzSize]="'small'"></nz-spin>
+    </div>
+    <div class="section-question" *ngIf="result">
+      <div class="more-question">
+        <div>{{ 'Please input if you have more concern? ' }}</div>
+        <input [formControl]="questionFormControl" class="query" nz-input type="text" placeholder="More questions" />
+      </div>
+      <div class="result">
+        {{ result }}
+      </div>
+    </div>
+  </div>
+</form>
