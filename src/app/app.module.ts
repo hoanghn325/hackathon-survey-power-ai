@@ -23,6 +23,7 @@ import { SurveyService } from "./service/survey.service";
 import { NzSpinModule } from "ng-zorro-antd/spin";
 import { SurveyAnalyticModule } from "./pages/survey-analytic/survey-analytic.module";
 import { NzInputModule } from "ng-zorro-antd/input";
+import { NzTableModule } from 'ng-zorro-antd/table';
 
 registerLocaleData(en);
 
@@ -43,6 +44,7 @@ registerLocaleData(en);
     EffectsModule.forRoot([AppEffects]),
     StoreModule.forRoot({ [SURVEY_STORE_KEY]: reducers }),
     SurveyAnalyticModule,
+    NzTableModule
     // isDevMode() ? StoreDevtoolsModule.instrument() : [],
   ],
   providers: [{ provide: NZ_I18N, useValue: en_US }, SurveyService],

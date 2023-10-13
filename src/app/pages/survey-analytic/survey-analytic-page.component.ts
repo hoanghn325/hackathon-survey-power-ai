@@ -7,6 +7,11 @@ import {
 } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
 import { debounceTime, distinctUntilChanged, take } from "rxjs";
+import {
+  DataTableColumn,
+  DataTableHeaderColumn,
+  SurveyTableData,
+} from "src/app/models/survey.models";
 import { SurveyService } from "src/app/service/survey.service";
 
 @Component({
@@ -15,19 +20,23 @@ import { SurveyService } from "src/app/service/survey.service";
   styleUrls: ["./survey-analytic-page.component.scss"],
 })
 export class SurveyAnalyticPageComponent implements OnInit {
-  public string =
-    'Please help analyze and give details comments for this data based on the score and text and show what is  the highest source and ecosystem based on it "{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:10,text:"Great",responseDate:"2023-09-3015:42:35+0700",country:"BD",userRole:"Inspector",organization:"316603_Tendam",source:"Android",plan:"Enterprise",ecosystem:"Tendam",coreChannel:"mobile:android",},{score:9,text:null,responseDate:"2023-09-3014:27:47+0700",country:null,userRole:"Inspector",organization:"311257_LibertyMillsLimited",source:"Android",plan:"Professional",ecosystem:"TargetCorp",coreChannel:"mobile:android",},{score:8,text:"null",responseDate:"2023-09-3010:54:48+0700",country:"IN",userRole:"AccountOwner",organization:"311958_MarqueImpexPrivateLtd.",source:"Web",plan:"Enterprise",ecosystem:"Professional",coreChannel:"web",},{score:3,text:"Soso",responseDate:"2023-09-2910:24:32+0700",country:null,userRole:"Inspector",organization:"317612_BV-INDIA",source:"Android",plan:"Enterprise",ecosystem:null,coreChannel:"mobile:android",},{score:1,text:null,responseDate:"2023-09-2810:43:37+0700",country:null,userRole:"Inspector",organization:"317648_BV-THAILAND",source:"Android",plan:"Enterprise",ecosystem:"",coreChannel:"mobile:android",},"';
+  @ViewChild("csvImport")
+  private csvImport: any;
+
   public result: any;
 
   public isLoading: boolean = false;
 
-  @ViewChild("csvImport")
-  private csvImport: any;
+  public isLoadingTable: boolean = false;
+
+  public importedData: Array<SurveyTableData> = [];
 
   public form: FormGroup;
 
+  public columns: DataTableColumn[] = [];
+
   public get questionFormControl(): FormControl {
-    return this.form.get('question') as FormControl;
+    return this.form.get("question") as FormControl;
   }
 
   constructor(
@@ -41,7 +50,7 @@ export class SurveyAnalyticPageComponent implements OnInit {
 
   public showSurvey() {
     this.isLoading = true;
-    this.surveyService.getSurvey(this.string).subscribe((response: any) => {
+    this.surveyService.getSurvey("checking").subscribe((response: any) => {
       this.result = response.candidates[0].output;
       this.isLoading = false;
       this.cdr.detectChanges();
@@ -49,6 +58,7 @@ export class SurveyAnalyticPageComponent implements OnInit {
   }
 
   public ngOnInit(): void {
+    this.columns = this.surveyService.initTable();
     this.questionChange();
   }
 
@@ -70,20 +80,21 @@ export class SurveyAnalyticPageComponent implements OnInit {
   public showProductFileUpload(): void {
     this.csvImport.nativeElement.click();
   }
-
-  private clearFileUploads(): void {
-    this.csvImport.nativeElement.value = "";
+  
+  private async getTextFromFile(event: any) {
+    const file = event.target.files[0];
+    let fileContent = await file.text();
+    return fileContent;
   }
 
-  public handleImportCSV(event: Event): void {
-    const files = (<HTMLInputElement>event.target).files;
-    const input = event.target;
-    var reader = new FileReader();
-    this.clearFileUploads();
-    // reader.readAsText(files[0]);
-    // reader.onload = (event: any) => {
-    //   var csv = event.target.result; // Content of CSV file
-    //   console.log(csv);
-    // }
+  public async handleImportCSV(event: any) {
+    this.isLoadingTable = true;
+    let fileContent = await this.getTextFromFile(event);
+    this.importedData = this.surveyService.importDataFromCSV(fileContent);
+    setTimeout(() => {
+      // Trick to show spinner, not affect the logic
+      this.isLoadingTable = false;
+      this.cdr.markForCheck();
+    }, 500);
   }
 }

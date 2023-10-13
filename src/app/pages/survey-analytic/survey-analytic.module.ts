@@ -7,6 +7,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzTableModule } from 'ng-zorro-antd/table';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import { NzInputModule } from 'ng-zorro-antd/input';
     NzSpinModule,
     NzInputModule,
     ReactiveFormsModule,
+    NzTableModule,
     SurveyAnalyticRoutingModule
   ]
 })
