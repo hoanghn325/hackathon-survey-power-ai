@@ -27,7 +27,6 @@ jobs:
           cache: "npm"
 
       - name: Install and build
-        working-directory: ./hackathon-survey-power-ai
         run: npm install && npm run gh-build && cp dist/hackathon-survey-power-ai/index.html dist/hackathon-survey-power-ai/404.html
 
       - name: Deploy
