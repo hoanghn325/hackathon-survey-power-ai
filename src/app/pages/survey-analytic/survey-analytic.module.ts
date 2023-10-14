@@ -8,6 +8,7 @@ import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { NzTableModule } from 'ng-zorro-antd/table';
     NzInputModule,
     ReactiveFormsModule,
     NzTableModule,
+    NzSelectModule,
     SurveyAnalyticRoutingModule
   ]
 })

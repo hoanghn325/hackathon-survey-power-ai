@@ -1,7 +1,6 @@
 import {
   ChangeDetectorRef,
   Component,
-  ElementRef,
   OnInit,
   ViewChild,
 } from "@angular/core";
@@ -9,7 +8,6 @@ import { FormControl, FormGroup } from "@angular/forms";
 import { debounceTime, distinctUntilChanged, take } from "rxjs";
 import {
   DataTableColumn,
-  DataTableHeaderColumn,
   SurveyTableData,
 } from "src/app/models/survey.models";
 import { SurveyService } from "src/app/service/survey.service";
@@ -39,6 +37,17 @@ export class SurveyAnalyticPageComponent implements OnInit {
     return this.form.get("question") as FormControl;
   }
 
+  public themeOptions = [
+    {
+      id: 'positve',
+      text: 'Positive'
+    },
+    {
+      id: 'negative',
+      text: 'Negative'
+    }
+  ]
+
   constructor(
     private surveyService: SurveyService,
     private cdr: ChangeDetectorRef
@@ -48,13 +57,19 @@ export class SurveyAnalyticPageComponent implements OnInit {
     });
   }
 
+  public themChanged(option: string, theme: string | undefined): void {
+    theme = option;
+  }
+
   public showSurvey() {
-    this.isLoading = true;
-    this.surveyService.getSurvey("checking").subscribe((response: any) => {
-      this.result = response.candidates[0].output;
-      this.isLoading = false;
-      this.cdr.detectChanges();
-    });
+    this.importedData = this.importedData.filter(item => item.theme === 'negative');
+    this.cdr.detectChanges();
+    // this.isLoading = true;
+    // this.surveyService.getSurvey("checking").subscribe((response: any) => {
+    //   this.result = response.candidates[0].output;
+    //   this.isLoading = false;
+    //   this.cdr.detectChanges();
+    // });
   }
 
   public ngOnInit(): void {
@@ -80,7 +95,7 @@ export class SurveyAnalyticPageComponent implements OnInit {
   public showProductFileUpload(): void {
     this.csvImport.nativeElement.click();
   }
-  
+
   private async getTextFromFile(event: any) {
     const file = event.target.files[0];
     let fileContent = await file.text();

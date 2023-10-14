@@ -1,34 +1,47 @@
-.survey-section {
+.form-survey {
   height: 100%;
 
-  .action {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    margin: 10px 0;
-  }
+  .survey-section {
+    height: 100%;
 
-  .section-question {
-    padding: 10px;
-
-    input {
+    .action {
+      display: flex;
+      gap: 10px;
+      align-items: center;
       margin: 10px 0;
-      width: 50%;
     }
 
-    .result {
-      box-shadow: 0 6px 9px #8092a633, 0 0 6px #8092a626;
-      border: 1px solid #eff2f6;
-      border-radius: 4px;
-      overflow: auto;
-      max-height: 300px;
-      width: fit-content;
+    .section-question {
       padding: 10px;
+      height: 100%;
+
+      input {
+        margin: 10px 0;
+        width: 50%;
+      }
+
+      .result {
+        box-shadow: 0 6px 9px #8092a633, 0 0 6px #8092a626;
+        border: 1px solid #eff2f6;
+        border-radius: 4px;
+        overflow: auto;
+        max-height: 300px;
+        width: fit-content;
+        padding: 10px;
+      }
+    }
+
+    .theme-dropdown {
+      width: 100%;
     }
   }
 }
 
 .ant-table-wrapper {
-  height: 420px;
+  height: 80%;
   overflow: auto;
+}
+
+.ant-table-tbody>tr.ant-table-row:hover>td {
+  background: white;
 }

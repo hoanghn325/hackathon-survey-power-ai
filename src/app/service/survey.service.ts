@@ -52,7 +52,7 @@ export class SurveyService {
       {
         key: DataTableHeaderColumn.Score,
         title: "Score",
-        width: "120px",
+        width: "70px",
       },
       {
         key: DataTableHeaderColumn.Text,
@@ -62,12 +62,12 @@ export class SurveyService {
       {
         key: DataTableHeaderColumn.ResponseDate,
         title: "Response Date",
-        width: "200px",
+        width: "250px",
       },
       {
         key: DataTableHeaderColumn.Country,
         title: "Country",
-        width: "120px",
+        width: "80px",
       },
       {
         key: DataTableHeaderColumn.UserRole,
@@ -107,7 +107,8 @@ export class SurveyService {
       {
         key: DataTableHeaderColumn.Theme,
         title: "Theme",
-        width: "100%",
+        width: "200px",
+        type: 'dropdown'
       },
     ];
   }

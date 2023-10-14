@@ -1,4 +1,4 @@
-<form [formGroup]="form">
+<form class="form-survey" [formGroup]="form">
   <div class="survey-section">
     <h3>NPS Advanced Analysis</h3>
 
@@ -10,12 +10,13 @@
       <button [disabled]="isLoading" nz-button nzType="default" (click)="showSurvey()">Process</button>
       <nz-spin *ngIf="isLoading" nzSimple [nzSize]="'small'"></nz-spin>
     </div>
-    <div *ngIf="importedData?.length" class="table-data">
-      <nz-table [nzLoading]="isLoadingTable" nzTemplateMode [nzData]="importedData" [nzShowPagination]="false" [nzBordered]="true">
+    <ng-container *ngIf="importedData?.length" class="table-data">
+      <nz-table [nzLoading]="isLoadingTable" nzTemplateMode [nzData]="importedData" [nzShowPagination]="false"
+        [nzBordered]="true">
         <thead>
           <tr>
             <ng-container *ngFor="let column of columns">
-              <th [nzColumnKey]="column.key"[nzWidth]="column.width">{{ column.title  }}
+              <th [nzColumnKey]="column.key" [nzWidth]="column.width">{{ column.title }}
               </th>
             </ng-container>
           </tr>
@@ -34,11 +35,17 @@
             <td>{{ item.ecosystem }}</td>
             <td>{{ item.coreChannel }}</td>
             <td>{{ item.coreEndUserAgeAmount }}</td>
-            <td>{{ item.theme }}</td>
+            <td>
+              <!-- For Theme -->
+              <nz-select [(ngModel)]="item.theme" [ngModelOptions]="{standalone: true}"
+                (ngModelChange)="themChanged($event, item.theme)" class="theme-dropdown">
+                <nz-option *ngFor="let item of themeOptions" [nzValue]="item.id" [nzLabel]="item.text"></nz-option>
+              </nz-select>
+            </td>
           </tr>
         </tbody>
       </nz-table>
-    </div>
+    </ng-container>
     <div class="section-question" *ngIf="result">
       <div class="more-question">
         <div>{{ 'Please input if you have more concern? ' }}</div>

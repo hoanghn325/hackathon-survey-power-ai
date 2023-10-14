@@ -23,6 +23,7 @@ export interface DataTableColumn {
   key: string;
   title: string;
   width: string;
+  type?: string;
 }
 
 
