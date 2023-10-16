@@ -30,84 +30,95 @@
           <!-- <img src="../../../assets/images/customer-experience.gif"> -->
         </div>
         <div>
-          Here are some observations about the NPS data:
+          Here is a summary of the key findings from analyzing the NPS data:
+          <div>Overall Sentiment: </div>
           <ul>
             <li>
-              There are 9 responses, with NPS scores ranging from 8 to 10. The average NPS is 9.33, which is considered
-              excellent.
+              The average NPS score is 4.8, indicating poor customer satisfaction overall.
             </li>
             <li>
-              Most responses don't have any written feedback. The one piece of feedback mentions defect rate and factory
-              performance.
-            </li>
-            <li>
-              The responses come from various roles - Inspectors, Account Owners, and Managers. They work for suppliers,
-              retailers, and inspection agencies.
-            </li>
-            <li>
-              The responses are mostly from the Inspectorio mobile app (Android), along with a few from the Inspectorio
-              website.
-            </li>
-            <li>
-              The organizations represented include Tendam, Liberty Mills, Marque Impex, Fortune Swimwear, Bureau
-              Veritas, Hansae, and Seasonal Visions International.
-            </li>
-            <li>
-              The responses come from multiple countries - Bangladesh, India, Cambodia, and an unknown country.
-            </li>
-            <li>
-              The surveys are in English or have no specified language.
-            </li>
-            <li>
-              The NPS data spans about 2 weeks from September 29 to September 30.
+              64% of respondents are detractors (score 0-6), 23% are passives (7-8), and only 13% are promoters (9-10).
             </li>
           </ul>
           <div>
-            In summary, this is very positive NPS data from a diverse set of respondents across Inspectorio's platform.
-            The high scores indicate respondents are likely promoters of Inspectorio. The one piece of feedback on
-            factory
-            performance could be an area to dig into further. Overall this NPS data looks very strong for Inspectorio.
-            Let
-            me know if you need any clarification or have additional questions!
+            Key Feedback Themes:
+          </div>
+          <ul>
+            <li>
+              UI/UX issues - 27% of comments mentioned the platform is not user friendly, too complicated, confusing, or
+              hard to navigate.
+            </li>
+            <li>
+              Feature requests - 25% of comments asked for new features like shortcuts, better search, more
+              customizations.
+            </li>
+            <li>
+              Business value concerns - 16% questioned the value or thought the platform was costly.
+            </li>
+            <li>
+              Performance issues - 10% mentioned slow loading times or waiting too long.
+            <li>
+              Positive feedback was mostly around ease of use and helpful instructions.
+            </li>
+          </ul>
+          <div>
+            User Profile:
+          </div>
+          <ul>
+            <li>
+              Roles: Mainly inspectors, account owners, and admins.
+            </li>
+            <li>
+              Industries: Suppliers, factories, retailers, inspection agencies.
+            </li>
+            <li>
+              Geographies: Bangladesh, India, Guatemala, Turkey, others.
+            </li>
+
+          </ul>
+          <div>
+            In summary, the NPS data indicates overall dissatisfaction driven by usability challenges, desired feature
+            improvements, and unclear business value. Addressing the UI/UX, adding commonly requested features, and
+            communicating the value proposition could help improve satisfaction.
           </div>
         </div>
       </div>
     </div>
-      <ng-container *ngIf="showTable" class="table-data">
-        <nz-table nzTemplateMode [nzLoading]="isLoadingTable" [nzData]="importedData" [nzShowPagination]="false" [nzBordered]="true"
-          [nzScroll]="{ y: '400px' }">
-          <thead>
-            <tr>
-              <ng-container *ngFor="let column of columns">
-                <th [nzColumnKey]="column.key" [nzWidth]="column.width">{{ column.title }}
-                </th>
-              </ng-container>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let item of importedData;">
-              <td>{{ item.id }}</td>
-              <td>{{ item.score }}</td>
-              <td>{{ item.text }}</td>
-              <td>{{ item.responseDate }}</td>
-              <td>{{ item.country }}</td>
-              <td>{{ item.userRole }}</td>
-              <td>{{ item.organization }}</td>
-              <td>{{ item.source }}</td>
-              <td>{{ item.plan }}</td>
-              <td>{{ item.ecosystem }}</td>
-              <td>{{ item.coreChannel }}</td>
-              <td>{{ item.coreEndUserAgeAmount }}</td>
-              <td>
-                <!-- For Theme -->
-                <nz-select [(ngModel)]="item.theme" [ngModelOptions]="{standalone: true}"
-                  (ngModelChange)="themChanged($event, item.theme)" class="theme-dropdown">
-                  <nz-option *ngFor="let item of themeOptions" [nzValue]="item.id" [nzLabel]="item.text"></nz-option>
-                </nz-select>
-              </td>
-            </tr>
-          </tbody>
-        </nz-table>
-      </ng-container>
-    </div>
+    <ng-container *ngIf="showTable" class="table-data">
+      <nz-table nzTemplateMode [nzLoading]="isLoadingTable" [nzData]="importedData" [nzShowPagination]="false"
+        [nzBordered]="true" [nzScroll]="{ y: '400px' }">
+        <thead>
+          <tr>
+            <ng-container *ngFor="let column of columns">
+              <th [nzColumnKey]="column.key" [nzWidth]="column.width">{{ column.title }}
+              </th>
+            </ng-container>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of importedData;">
+            <td>{{ item.id }}</td>
+            <td>{{ item.score }}</td>
+            <td>{{ item.text }}</td>
+            <td>{{ item.responseDate }}</td>
+            <td>{{ item.country }}</td>
+            <td>{{ item.userRole }}</td>
+            <td>{{ item.organization }}</td>
+            <td>{{ item.source }}</td>
+            <td>{{ item.plan }}</td>
+            <td>{{ item.ecosystem }}</td>
+            <td>{{ item.coreChannel }}</td>
+            <td>{{ item.coreEndUserAgeAmount }}</td>
+            <td>
+              <!-- For Theme -->
+              <nz-select [(ngModel)]="item.theme" [ngModelOptions]="{standalone: true}"
+                (ngModelChange)="themChanged($event, item.theme)" class="theme-dropdown">
+                <nz-option *ngFor="let item of themeOptions" [nzValue]="item.id" [nzLabel]="item.text"></nz-option>
+              </nz-select>
+            </td>
+          </tr>
+        </tbody>
+      </nz-table>
+    </ng-container>
+  </div>
 </form>

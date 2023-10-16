@@ -1,6 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit, ViewChild } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
-import { debounceTime, distinctUntilChanged, take } from "rxjs";
 import { DataTableColumn, SurveyTableData } from "src/app/models/survey.models";
 import { NzNotificationService } from "ng-zorro-antd/notification";
 import { SurveyService } from "src/app/service/survey.service";
@@ -80,10 +79,13 @@ export class SurveyAnalyticPageComponent implements OnInit {
     this.isLoadingTable = true;
     setTimeout(() => {
       this.importedData.forEach((data) => {
-        if (Number(data.score) > 9) {
+        const score = Number(data.score);
+        if (score < 4) {
           data.theme = this.themeOptions[0].id;
-        } else {
+        }  else if (score > 4 && score < 8) {
           data.theme = this.themeOptions[1].id;
+        } else {
+          data.theme = this.themeOptions[2].id;
         }
         this.cdr.detectChanges();
       });
