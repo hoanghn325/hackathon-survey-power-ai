@@ -15,7 +15,7 @@
       <nz-spin *ngIf="isLoadingProcess" nzSimple [nzSize]="'small'"></nz-spin>
     </div>
     <div class="section-question" *ngIf="showTable">
-      <h3>Details</h3>
+      <span>Details</span>
       <div class="more-question">
         <div>{{ 'Use AI to interact with your data here:' }}</div>
         <input (keydown.enter)="mappingTheme()" [formControl]="questionFormControl" class="query" nz-input type="text"
@@ -73,7 +73,7 @@
       </div>
     </div>
     <ng-container *ngIf="showTable" class="table-data">
-      <nz-table nzTemplateMode [nzData]="importedData" [nzShowPagination]="false" [nzBordered]="true">
+      <nz-table nzTemplateMode [nzData]="importedData" [nzShowPagination]="false" [nzBordered]="true" [nzScroll]="{ y: '400px' }">
         <thead>
           <tr>
             <ng-container *ngFor="let column of columns">

@@ -28,13 +28,17 @@
     .section-question {
       margin-bottom: 20px;
 
+      span {
+        font-size: 18px;
+      }
+
       input {
         margin: 10px 0;
         width: 50%;
       }
 
       .more-question {
-        margin-top: 20px;
+        margin-top: 10px;
       }
 
       .result {
@@ -47,8 +51,6 @@
         box-shadow: 0 6px 9px #8092a633, 0 0 6px #8092a626;
         border: 1px solid #eff2f6;
         border-radius: 4px;
-        overflow: auto;
-        max-height: 300px;
         width: fit-content;
         padding: 10px;
         gap: 5px;
@@ -62,8 +64,8 @@
 }
 
 .ant-table-wrapper {
-  height: 80%;
-  overflow: auto;
+  // height: 80%;
+  // overflow: auto;
 }
 
 .ant-table-tbody > tr.ant-table-row:hover > td {
