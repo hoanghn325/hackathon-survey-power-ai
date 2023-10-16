@@ -168,7 +168,7 @@ export class SurveyService {
       {
         key: DataTableHeaderColumn.Theme,
         title: "Theme",
-        width: "200px",
+        width: "250px",
         type: 'dropdown'
       },
     ];

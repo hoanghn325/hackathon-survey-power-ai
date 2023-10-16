@@ -13,7 +13,9 @@ export class SurveyAnalyticPageComponent implements OnInit {
   @ViewChild("csvImport")
   private csvImport: any;
 
-  public result: any;
+  public showResult: boolean = false;
+
+  public comment: string = "";
 
   public isLoadingProcess: boolean = false;
 
@@ -29,11 +31,15 @@ export class SurveyAnalyticPageComponent implements OnInit {
 
   public showProcessBtn: boolean = false;
 
-  public get questionFormControl(): FormControl {
-    return this.form.get("question") as FormControl;
-  }
+  public showFirstAnswer: boolean = false;
+
+  public showSecondAnswer: boolean = false;
 
   public themeOptions = [
+    {
+      id: "performanceIssue",
+      text: "Performance issues",
+    },
     {
       id: "ui-ux",
       text: "UI/UX",
@@ -75,17 +81,26 @@ export class SurveyAnalyticPageComponent implements OnInit {
     this.columns = this.surveyService.initTable();
   }
 
-  public mappingTheme(event?:any): void {
+  public mappingTheme(event?: any): void {
     this.isLoadingTable = true;
     setTimeout(() => {
+      this.showResult = true;
+      if (this.comment.includes("categorize")) {
+        this.showFirstAnswer = true;
+      } else if (this.comment.includes("lowest score")) {
+        this.showFirstAnswer = false;
+        this.showSecondAnswer = true;
+      }
       this.importedData.forEach((data) => {
         const score = Number(data.score);
-        if (score < 4) {
+        if (score < 3) {
           data.theme = this.themeOptions[0].id;
-        }  else if (score > 4 && score < 8) {
+        } else if (score >= 3 && score <= 5) {
           data.theme = this.themeOptions[1].id;
-        } else {
+        } else if (score > 5 && score < 8) {
           data.theme = this.themeOptions[2].id;
+        } else {
+          data.theme = this.themeOptions[3].id;
         }
         this.cdr.detectChanges();
       });

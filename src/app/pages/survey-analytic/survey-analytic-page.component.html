@@ -1,4 +1,4 @@
-<form class="form-survey" [formGroup]="form">
+<div class="form-survey">
   <div class="survey-section">
     <h2>NPS Advanced Analysis</h2>
     <h3> Import Data </h3>
@@ -18,18 +18,14 @@
       <span>Details</span>
       <div class="more-question">
         <div>{{ 'Use AI to interact with your data here:' }}</div>
-        <input (keydown.enter)="mappingTheme()" [formControl]="questionFormControl" class="query" nz-input type="text"
+        <input (keydown.enter)="mappingTheme()" [(ngModel)]="comment" class="query" nz-input type="text"
           placeholder="Input command here" />
       </div>
-      <div class="result">
+      <div *ngIf="showResult" class="result">
         <div>
-          <!-- <img src="../../../assets/images/image-chat.gif"> -->
-          <!-- <img src="../../../assets/images/info.gif"> -->
-          <!-- <img src="../../../assets/images/shooting-star.gif"> -->
           <img src="../../../assets/images/abc.gif">
-          <!-- <img src="../../../assets/images/customer-experience.gif"> -->
         </div>
-        <div>
+        <div *ngIf="showFirstAnswer">
           Here is a summary of the key findings from analyzing the NPS data:
           <div>Overall Sentiment: </div>
           <ul>
@@ -82,6 +78,56 @@
             communicating the value proposition could help improve satisfaction.
           </div>
         </div>
+        <div *ngIf="showSecondAnswer">
+          <div>
+            To determine the ecosystem with the lowest average NPS score, I looked at the scores grouped by the
+            "ecosystem" field in the data. Here are the key findings:
+          </div>
+          <ul>
+            <li>
+              The ecosystem with the lowest average NPS is "Target Corp", with an average score of 3.9
+            </li>
+            <li>
+              There were 18 responses from the Target Corp ecosystem.
+            </li>
+            <li>
+              The breakdown of promoters/passives/detractors for Target Corp is:
+            </li>
+          </ul>
+          <div>Promoters: 11%</div>
+          <div>Passives: 22%</div>
+          <div>Detractors: 67%</div>
+          <ul>
+            <li>
+              Other ecosystems with low averages include:
+              <ul>
+                <li>
+                  Walmart Inc. - Avg NPS 4.3 (across 6 responses)
+                </li>
+                <li>
+                  Carter's - Avg NPS 5 (1 response)
+                </li>
+              </ul>
+            </li>
+            <li>
+              The highest ecosystem averages are:
+              <ul>
+                <li>
+                  Tendam - Avg NPS 10 (1 response)
+                </li>
+                <li>
+                  Yunus Textile Mills Limited - Avg NPS 10 (1 response)
+                </li>
+              </ul>
+            </li>
+          </ul>
+          <div>
+            So in summary, the Target Corp ecosystem has the lowest average NPS score at 3.9, with most respondents as
+            detractors. This indicates there is significant room for improvement in customer satisfaction amongst users
+            of Inspectorio in the Target Corp ecosystem. Let me know if you need any clarification or additional details
+            on the ecosystem NPS analysis!
+          </div>
+        </div>
       </div>
     </div>
     <ng-container *ngIf="showTable" class="table-data">
@@ -121,4 +167,3 @@
       </nz-table>
     </ng-container>
   </div>
-</form>
