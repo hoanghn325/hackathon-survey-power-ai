@@ -22,7 +22,6 @@
           placeholder="Input command here" />
       </div>
       <div class="result">
-        <nz-spin *ngIf="isLoadingQuestion" nzSimple [nzSize]="'small'"> </nz-spin>
         <div>
           <!-- <img src="../../../assets/images/image-chat.gif"> -->
           <!-- <img src="../../../assets/images/info.gif"> -->
@@ -65,47 +64,50 @@
           </ul>
           <div>
             In summary, this is very positive NPS data from a diverse set of respondents across Inspectorio's platform.
-            The high scores indicate respondents are likely promoters of Inspectorio. The one piece of feedback on factory
-            performance could be an area to dig into further. Overall this NPS data looks very strong for Inspectorio. Let
+            The high scores indicate respondents are likely promoters of Inspectorio. The one piece of feedback on
+            factory
+            performance could be an area to dig into further. Overall this NPS data looks very strong for Inspectorio.
+            Let
             me know if you need any clarification or have additional questions!
           </div>
         </div>
       </div>
     </div>
-    <ng-container *ngIf="showTable" class="table-data">
-      <nz-table nzTemplateMode [nzData]="importedData" [nzShowPagination]="false" [nzBordered]="true" [nzScroll]="{ y: '400px' }">
-        <thead>
-          <tr>
-            <ng-container *ngFor="let column of columns">
-              <th [nzColumnKey]="column.key" [nzWidth]="column.width">{{ column.title }}
-              </th>
-            </ng-container>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of importedData;">
-            <td>{{ item.id }}</td>
-            <td>{{ item.score }}</td>
-            <td>{{ item.text }}</td>
-            <td>{{ item.responseDate }}</td>
-            <td>{{ item.country }}</td>
-            <td>{{ item.userRole }}</td>
-            <td>{{ item.organization }}</td>
-            <td>{{ item.source }}</td>
-            <td>{{ item.plan }}</td>
-            <td>{{ item.ecosystem }}</td>
-            <td>{{ item.coreChannel }}</td>
-            <td>{{ item.coreEndUserAgeAmount }}</td>
-            <td>
-              <!-- For Theme -->
-              <nz-select [(ngModel)]="item.theme" [ngModelOptions]="{standalone: true}"
-                (ngModelChange)="themChanged($event, item.theme)" class="theme-dropdown">
-                <nz-option *ngFor="let item of themeOptions" [nzValue]="item.id" [nzLabel]="item.text"></nz-option>
-              </nz-select>
-            </td>
-          </tr>
-        </tbody>
-      </nz-table>
-    </ng-container>
-  </div>
+      <ng-container *ngIf="showTable" class="table-data">
+        <nz-table nzTemplateMode [nzLoading]="isLoadingTable" [nzData]="importedData" [nzShowPagination]="false" [nzBordered]="true"
+          [nzScroll]="{ y: '400px' }">
+          <thead>
+            <tr>
+              <ng-container *ngFor="let column of columns">
+                <th [nzColumnKey]="column.key" [nzWidth]="column.width">{{ column.title }}
+                </th>
+              </ng-container>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let item of importedData;">
+              <td>{{ item.id }}</td>
+              <td>{{ item.score }}</td>
+              <td>{{ item.text }}</td>
+              <td>{{ item.responseDate }}</td>
+              <td>{{ item.country }}</td>
+              <td>{{ item.userRole }}</td>
+              <td>{{ item.organization }}</td>
+              <td>{{ item.source }}</td>
+              <td>{{ item.plan }}</td>
+              <td>{{ item.ecosystem }}</td>
+              <td>{{ item.coreChannel }}</td>
+              <td>{{ item.coreEndUserAgeAmount }}</td>
+              <td>
+                <!-- For Theme -->
+                <nz-select [(ngModel)]="item.theme" [ngModelOptions]="{standalone: true}"
+                  (ngModelChange)="themChanged($event, item.theme)" class="theme-dropdown">
+                  <nz-option *ngFor="let item of themeOptions" [nzValue]="item.id" [nzLabel]="item.text"></nz-option>
+                </nz-select>
+              </td>
+            </tr>
+          </tbody>
+        </nz-table>
+      </ng-container>
+    </div>
 </form>

@@ -20,7 +20,7 @@ export class SurveyAnalyticPageComponent implements OnInit {
 
   public showTable: boolean = false;
 
-  public isLoadingQuestion: boolean = false;
+  public isLoadingTable: boolean = false;
 
   public importedData: Array<SurveyTableData> = [];
 
@@ -77,7 +77,7 @@ export class SurveyAnalyticPageComponent implements OnInit {
   }
 
   public mappingTheme(): void {
-    this.isLoadingProcess = true;
+    this.isLoadingTable = true;
     setTimeout(() => {
       this.importedData.forEach((data) => {
         if (Number(data.score) > 9) {
@@ -90,9 +90,9 @@ export class SurveyAnalyticPageComponent implements OnInit {
       this.nzNotificationService.create(
         "success",
         "Notification",
-        "Update table successfully"
+        "Update data successfully"
       );
-      this.isLoadingProcess = false;
+      this.isLoadingTable = false;
       this.cdr.markForCheck();
     }, 1000);
   }
