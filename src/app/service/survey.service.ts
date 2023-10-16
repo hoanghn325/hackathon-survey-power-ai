@@ -4,8 +4,6 @@ import { Observable } from "rxjs";
 import * as camelCaseKeys from "camelcase-keys";
 import { DataTableColumn, DataTableHeaderColumn } from "../models/survey.models";
 
-export const APIKey = "AIzaSyDWMqMbT5QnY81sQiJPaa8c4-KysFKxjSM";
-export const url = `https://generativelanguage.googleapis.com/v1beta3/models/text-bison-001:generateText?key=${APIKey}`;
 
 @Injectable()
 export class SurveyService {
@@ -73,7 +71,7 @@ export class SurveyService {
   }
 
   public getSurvey(input: any): Observable<any> {
-    return this.http.post(url, { prompt: { text: input } });
+    return this.http.post('', { prompt: { text: input } });
   }
 
   public importDataFromCSV(csvText: string): Array<any> {
