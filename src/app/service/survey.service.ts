@@ -113,7 +113,7 @@ export class SurveyService {
       {
         key: DataTableHeaderColumn.Score,
         title: "Score",
-        width: "70px",
+        width: "100px",
       },
       {
         key: DataTableHeaderColumn.Text,
@@ -128,7 +128,7 @@ export class SurveyService {
       {
         key: DataTableHeaderColumn.Country,
         title: "Country",
-        width: "80px",
+        width: "100px",
       },
       {
         key: DataTableHeaderColumn.UserRole,
