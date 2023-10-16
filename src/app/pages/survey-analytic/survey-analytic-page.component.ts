@@ -76,7 +76,7 @@ export class SurveyAnalyticPageComponent implements OnInit {
     this.columns = this.surveyService.initTable();
   }
 
-  public mappingTheme(): void {
+  public mappingTheme(event?:any): void {
     this.isLoadingTable = true;
     setTimeout(() => {
       this.importedData.forEach((data) => {
@@ -95,6 +95,7 @@ export class SurveyAnalyticPageComponent implements OnInit {
       this.isLoadingTable = false;
       this.cdr.markForCheck();
     }, 1000);
+    event.stopPropagation();
   }
 
   public showProductFileUpload(): void {
