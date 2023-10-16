@@ -1,15 +1,8 @@
-import {
-  ChangeDetectorRef,
-  Component,
-  OnInit,
-  ViewChild,
-} from "@angular/core";
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
 import { debounceTime, distinctUntilChanged, take } from "rxjs";
-import {
-  DataTableColumn,
-  SurveyTableData,
-} from "src/app/models/survey.models";
+import { DataTableColumn, SurveyTableData } from "src/app/models/survey.models";
+import { NzNotificationService } from "ng-zorro-antd/notification";
 import { SurveyService } from "src/app/service/survey.service";
 
 @Component({
@@ -23,9 +16,11 @@ export class SurveyAnalyticPageComponent implements OnInit {
 
   public result: any;
 
-  public isLoading: boolean = false;
+  public isLoadingProcess: boolean = false;
 
-  public isLoadingTable: boolean = false;
+  public showTable: boolean = false;
+
+  public isLoadingQuestion: boolean = false;
 
   public importedData: Array<SurveyTableData> = [];
 
@@ -33,24 +28,31 @@ export class SurveyAnalyticPageComponent implements OnInit {
 
   public columns: DataTableColumn[] = [];
 
+  public showProcessBtn: boolean = false;
+
   public get questionFormControl(): FormControl {
     return this.form.get("question") as FormControl;
   }
 
   public themeOptions = [
     {
-      id: 'positve',
-      text: 'Positive'
+      id: "ui-ux",
+      text: "UI/UX",
     },
     {
-      id: 'negative',
-      text: 'Negative'
-    }
-  ]
+      id: "featureFeedback",
+      text: "Feature Feedback",
+    },
+    {
+      id: "general",
+      text: "General",
+    },
+  ];
 
   constructor(
     private surveyService: SurveyService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private nzNotificationService: NzNotificationService
   ) {
     this.form = new FormGroup({
       question: new FormControl(null),
@@ -61,35 +63,38 @@ export class SurveyAnalyticPageComponent implements OnInit {
     theme = option;
   }
 
-  public showSurvey() {
-    this.importedData = this.importedData.filter(item => item.theme === 'negative');
-    this.cdr.detectChanges();
-    // this.isLoading = true;
-    // this.surveyService.getSurvey("checking").subscribe((response: any) => {
-    //   this.result = response.candidates[0].output;
-    //   this.isLoading = false;
-    //   this.cdr.detectChanges();
-    // });
+  public async showSurvey() {
+    this.isLoadingProcess = true;
+    setTimeout(() => {
+      this.showTable = true;
+      this.isLoadingProcess = false;
+      this.cdr.markForCheck();
+    }, 1000);
   }
 
   public ngOnInit(): void {
     this.columns = this.surveyService.initTable();
-    this.questionChange();
   }
 
-  public questionChange(): void {
-    this.questionFormControl.valueChanges
-      .pipe(distinctUntilChanged(), debounceTime(1500), take(1))
-      .subscribe((data) => {
-        this.isLoading = true;
-        if (data) {
-          this.surveyService.getSurvey(data).subscribe((response: any) => {
-            this.result = response.candidates[0].output;
-            this.isLoading = false;
-            this.cdr.detectChanges();
-          });
+  public mappingTheme(): void {
+    this.isLoadingProcess = true;
+    setTimeout(() => {
+      this.importedData.forEach((data) => {
+        if (Number(data.score) > 9) {
+          data.theme = this.themeOptions[0].id;
+        } else {
+          data.theme = this.themeOptions[1].id;
         }
+        this.cdr.detectChanges();
       });
+      this.nzNotificationService.create(
+        "success",
+        "Notification",
+        "Update table successfully"
+      );
+      this.isLoadingProcess = false;
+      this.cdr.markForCheck();
+    }, 1000);
   }
 
   public showProductFileUpload(): void {
@@ -103,13 +108,13 @@ export class SurveyAnalyticPageComponent implements OnInit {
   }
 
   public async handleImportCSV(event: any) {
-    this.isLoadingTable = true;
     let fileContent = await this.getTextFromFile(event);
     this.importedData = this.surveyService.importDataFromCSV(fileContent);
-    setTimeout(() => {
-      // Trick to show spinner, not affect the logic
-      this.isLoadingTable = false;
-      this.cdr.markForCheck();
-    }, 500);
+    this.nzNotificationService.create(
+      "success",
+      "Notification",
+      "Your file is imported successfully"
+    );
+    this.showProcessBtn = true;
   }
 }

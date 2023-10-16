@@ -1,18 +1,79 @@
 <form class="form-survey" [formGroup]="form">
   <div class="survey-section">
-    <h3>NPS Advanced Analysis</h3>
-
-    <button [disabled]="isLoading" (click)="csvImport.click()" id="upload-csv-btn" nzType="primary" nz-button>
-      {{ 'Import File' }}
-    </button>
-    <input #csvImport (change)="handleImportCSV($event)" [accept]="'.csv'" hidden="true" type="file" />
+    <h2>NPS Advanced Analysis</h2>
+    <h3> Import Data </h3>
     <div class="action">
-      <button [disabled]="isLoading" nz-button nzType="default" (click)="showSurvey()">Process</button>
-      <nz-spin *ngIf="isLoading" nzSimple [nzSize]="'small'"></nz-spin>
+      <button [disabled]="isLoadingProcess" (click)="csvImport.click()" id="upload-csv-btn" nzType="primary" nz-button>
+        {{ 'Import File' }}
+        <span nz-icon nzType="import" nzTheme="outline"></span>
+      </button>
+      <input #csvImport (change)="handleImportCSV($event)" [accept]="'.csv'" hidden="true" type="file" />
+      <button *ngIf="showProcessBtn" [disabled]="isLoadingProcess" nz-button nzType="default" (click)="showSurvey()"
+        nzDanger>{{ 'Process' }}
+        <span nz-icon nzType="bulb" nzTheme="outline"></span>
+      </button>
+      <nz-spin *ngIf="isLoadingProcess" nzSimple [nzSize]="'small'"></nz-spin>
     </div>
-    <ng-container *ngIf="importedData?.length" class="table-data">
-      <nz-table [nzLoading]="isLoadingTable" nzTemplateMode [nzData]="importedData" [nzShowPagination]="false"
-        [nzBordered]="true">
+    <div class="section-question" *ngIf="showTable">
+      <h3>Details</h3>
+      <div class="more-question">
+        <div>{{ 'Use AI to interact with your data here:' }}</div>
+        <input (keydown.enter)="mappingTheme()" [formControl]="questionFormControl" class="query" nz-input type="text"
+          placeholder="Input command here" />
+      </div>
+      <div class="result">
+        <nz-spin *ngIf="isLoadingQuestion" nzSimple [nzSize]="'small'"> </nz-spin>
+        <div>
+          <!-- <img src="../../../assets/images/image-chat.gif"> -->
+          <!-- <img src="../../../assets/images/info.gif"> -->
+          <!-- <img src="../../../assets/images/shooting-star.gif"> -->
+          <img src="../../../assets/images/abc.gif">
+          <!-- <img src="../../../assets/images/customer-experience.gif"> -->
+        </div>
+        <div>
+          Here are some observations about the NPS data:
+          <ul>
+            <li>
+              There are 9 responses, with NPS scores ranging from 8 to 10. The average NPS is 9.33, which is considered
+              excellent.
+            </li>
+            <li>
+              Most responses don't have any written feedback. The one piece of feedback mentions defect rate and factory
+              performance.
+            </li>
+            <li>
+              The responses come from various roles - Inspectors, Account Owners, and Managers. They work for suppliers,
+              retailers, and inspection agencies.
+            </li>
+            <li>
+              The responses are mostly from the Inspectorio mobile app (Android), along with a few from the Inspectorio
+              website.
+            </li>
+            <li>
+              The organizations represented include Tendam, Liberty Mills, Marque Impex, Fortune Swimwear, Bureau
+              Veritas, Hansae, and Seasonal Visions International.
+            </li>
+            <li>
+              The responses come from multiple countries - Bangladesh, India, Cambodia, and an unknown country.
+            </li>
+            <li>
+              The surveys are in English or have no specified language.
+            </li>
+            <li>
+              The NPS data spans about 2 weeks from September 29 to September 30.
+            </li>
+          </ul>
+          <div>
+            In summary, this is very positive NPS data from a diverse set of respondents across Inspectorio's platform.
+            The high scores indicate respondents are likely promoters of Inspectorio. The one piece of feedback on factory
+            performance could be an area to dig into further. Overall this NPS data looks very strong for Inspectorio. Let
+            me know if you need any clarification or have additional questions!
+          </div>
+        </div>
+      </div>
+    </div>
+    <ng-container *ngIf="showTable" class="table-data">
+      <nz-table nzTemplateMode [nzData]="importedData" [nzShowPagination]="false" [nzBordered]="true">
         <thead>
           <tr>
             <ng-container *ngFor="let column of columns">
@@ -46,14 +107,5 @@
         </tbody>
       </nz-table>
     </ng-container>
-    <div class="section-question" *ngIf="result">
-      <div class="more-question">
-        <div>{{ 'Please input if you have more concern? ' }}</div>
-        <input [formControl]="questionFormControl" class="query" nz-input type="text" placeholder="More questions" />
-      </div>
-      <div class="result">
-        {{ result }}
-      </div>
-    </div>
   </div>
 </form>

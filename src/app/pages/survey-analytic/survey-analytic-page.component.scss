@@ -4,6 +4,20 @@
   .survey-section {
     height: 100%;
 
+    h2 {
+      
+      font-size: 24px;
+    }
+
+    h3 {
+      border-left: 3px solid #001529;
+      padding-left: 10px;
+      font-size: 18px;
+      margin: 20px 0;
+    }
+
+
+
     .action {
       display: flex;
       gap: 10px;
@@ -12,15 +26,24 @@
     }
 
     .section-question {
-      padding: 10px;
-      height: 100%;
+      margin-bottom: 20px;
 
       input {
         margin: 10px 0;
         width: 50%;
       }
 
+      .more-question {
+        margin-top: 20px;
+      }
+
       .result {
+        img {
+          height: 32px;
+          width: 32px;
+        }
+
+        display: flex;
         box-shadow: 0 6px 9px #8092a633, 0 0 6px #8092a626;
         border: 1px solid #eff2f6;
         border-radius: 4px;
@@ -28,6 +51,7 @@
         max-height: 300px;
         width: fit-content;
         padding: 10px;
+        gap: 5px;
       }
     }
 
@@ -42,6 +66,6 @@
   overflow: auto;
 }
 
-.ant-table-tbody>tr.ant-table-row:hover>td {
+.ant-table-tbody > tr.ant-table-row:hover > td {
   background: white;
 }
